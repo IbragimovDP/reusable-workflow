@@ -4,6 +4,18 @@ on:
     tags:
       - v*
   workflow_call:
+    secrets:
+      ITC_TEAM_ID: 
+      APPLICATON_ID: 
+      BUNDLE_IDENTIFIER: 
+      DEVELOPER_PORTAL_TEAM_ID: 
+      FASTLANE_APPLE_EMAIL_ID: 
+      FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: 
+      MATCH_PASSWORD:
+      GIT_AUTHORIZATION:
+      PROVISIONING_PROFILE_SPECIFIER:
+      TEMP_KEYCHAIN_PASSWORD: 
+      TEMP_KEYCHAIN_USER:
       
 jobs:
  deploy_ios:
@@ -38,7 +50,6 @@ jobs:
         with:
           lane: closed_beta
           subdirectory: ios
-        env:
           ITC_TEAM_ID: '${{ secrets.ITC_TEAM_ID }}'
           APPLICATON_ID: '${{ secrets.APPLICATON_ID }}'
           BUNDLE_IDENTIFIER: '${{ secrets.BUNDLE_IDENTIFIER }}'
@@ -57,7 +68,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
         with:
           channel-id: C02PLQZ4JM8
-          slack-message: "❌Build uploading was failed\n❌Please fix"
+          slack-message: "❌${{ github.repository }} build uploading was failed\n❌Please fix"
       - name: Slack Notification success
         if: ${{ success() }}
         uses: slackapi/slack-github-action@v1.19.0
