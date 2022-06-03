@@ -5,17 +5,28 @@ on:
       - v*
   workflow_call:
     secrets:
-      ITC_TEAM_ID: 
-      APPLICATON_ID: 
-      BUNDLE_IDENTIFIER: 
-      DEVELOPER_PORTAL_TEAM_ID: 
-      FASTLANE_APPLE_EMAIL_ID: 
-      FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: 
+      ITC_TEAM_ID:
+        required: true
+      APPLICATON_ID:
+        required: true
+      BUNDLE_IDENTIFIER:
+        required: true
+      DEVELOPER_PORTAL_TEAM_ID:
+        required: true
+      FASTLANE_APPLE_EMAIL_ID:
+        required: true
+      FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD:
+        required: true
       MATCH_PASSWORD:
+        required: true
       GIT_AUTHORIZATION:
+        required: true
       PROVISIONING_PROFILE_SPECIFIER:
-      TEMP_KEYCHAIN_PASSWORD: 
+        required: true
+      TEMP_KEYCHAIN_PASSWORD:
+        required: true
       TEMP_KEYCHAIN_USER:
+        required: true
       
 jobs:
  deploy_ios:
