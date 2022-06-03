@@ -61,6 +61,7 @@ jobs:
         with:
           lane: closed_beta
           subdirectory: ios
+        env:
           ITC_TEAM_ID: '${{ secrets.ITC_TEAM_ID }}'
           APPLICATON_ID: '${{ secrets.APPLICATON_ID }}'
           BUNDLE_IDENTIFIER: '${{ secrets.BUNDLE_IDENTIFIER }}'
