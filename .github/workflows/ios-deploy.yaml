@@ -24,6 +24,8 @@ on:
         required: true
       TEMP_KEYCHAIN_USER:
         required: true
+      SLACK_NOTIFICATIONS_BOT_TOKEN:
+        required: true
       
 jobs:
  deploy_ios:
