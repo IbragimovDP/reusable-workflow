@@ -91,7 +91,7 @@ jobs:
       - name: Get app name
         id: get_app_name
         run: |
-          echo "::set-output name=app_name::$(grep 'name:' pubspec.yaml | cut -d' ' -f2)" 
+          echo "::set-output name=app_name::$(/usr/libexec/PlistBuddy -c "Print CFBundleName" path_to/Info.plist)"
       - name: 🍏🚀 Deploy to App Store (Testflight)
         uses: apple-actions/upload-testflight-build@v1
         with:
