@@ -30,6 +30,10 @@ jobs:
     name: 🍏📦🚀 Build & deploy iOS release
     runs-on: macos-latest
     steps:
+      - name: Get app name
+        id: get_app_name
+        run: |
+          echo "::set-output name=app_name::$(/usr/libexec/PlistBuddy -c "Print CFBundleName" ./ios/Runner/Info.plist)"
       - name: ⬇️ Checkout repository
         uses: actions/checkout@v3
       - name: 🔐 Install Apple certificate and provisioning profile
