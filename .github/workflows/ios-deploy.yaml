@@ -30,6 +30,15 @@ jobs:
     name: 🍏📦🚀 Build & deploy iOS release
     runs-on: macos-latest
     steps:
+      - name: Validate tag format
+        run: |
+          TAG=${{ github.ref_name }}
+          TAG_NAME=${TAG##*/}
+          echo "Validating tag format for: $TAG_NAME"
+          if ! echo "$TAG_NAME" | grep -Eq '^[a-zA-Z][0-9]+\.[0-9]+\.[0-9]+\+[0-9]+$'; then
+            echo "Error: Tag does not match expected format (e.g., i1.2.3+0)."
+            exit 1
+          fi
       - name: Get app name
         id: get_app_name
         run: |
@@ -92,10 +101,6 @@ jobs:
             --release \
             --target lib/main.dart \
             --export-options-plist=ios/Runner/ExportOptions.plist
-      - name: Get app name
-        id: get_app_name
-        run: |
-          echo "::set-output name=app_name::$(/usr/libexec/PlistBuddy -c "Print CFBundleName" /ios/Runner/Info.plist)"
       - name: 🍏🚀 Deploy to App Store (Testflight)
         uses: apple-actions/upload-testflight-build@v1
         with:
