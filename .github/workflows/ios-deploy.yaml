@@ -24,7 +24,11 @@ on:
         required: true
       SLACK_NOTIFICATIONS_BOT_TOKEN:
         required: true
-      
+
+concurrency: 
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   deployIos:
     name: 🍏📦🚀 Build & deploy iOS release
