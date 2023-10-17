@@ -115,8 +115,8 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
         with:
-          channel-id: ${{ secrets.SLACK_FAILURE_CHANNEL_ID }}
-          slack-message: "❌${{ github.repository }} build uploading was failed"
+          channel-id: ${{ secrets.PROJECT_CHANNEL_ID }}
+          slack-message: "❌${{ github.repository }} build uploading was failed. [Job Details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
       - name: Slack Notification success
         if: ${{ success() }}
         uses: slackapi/slack-github-action@v1.24.0
