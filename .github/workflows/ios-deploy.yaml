@@ -45,16 +45,16 @@ jobs:
             echo "Error: Tag does not match expected format (e.g., i1.2.3+0)."
             exit 1
           fi
-      - uses: shaunco/ssh-agent@git-repo-mapping # this action will configure git to use the right SSH key per each repository. 
+      - name: ⬇️ Checkout common repository
+        uses: actions/checkout@v4
+        with: 
+          repository: IbragimovDP/mobisharks_common
+          ssh-key: ${{ secrets.GIT_SUBMODULE_KEY}}
+          path: mobisharks_common
+      - name: ⬇️ Checkout target repository
+        uses: actions/checkout@v4
         with:
-          ssh-private-key: |
-            ${{ secrets.GIT_SUBMODULE_KEY}}
-          repo-mappings: |
-            github.com/IbragimovDP/mobisharks_common
-      - name: ⬇️ Checkout repository
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive # this is important for submodules access
+          path: main
       - name: Get app name
         id: get_app_name
         run: |
