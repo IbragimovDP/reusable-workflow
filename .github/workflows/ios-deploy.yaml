@@ -24,8 +24,6 @@ on:
         required: true
       SLACK_NOTIFICATIONS_BOT_TOKEN:
         required: true
-      GIT_SUBMODULE_KEY:
-        required: false
 
 concurrency: 
   group: ${{ github.workflow }}
@@ -45,16 +43,8 @@ jobs:
             echo "Error: Tag does not match expected format (e.g., i1.2.3+0)."
             exit 1
           fi
-      - name: ⬇️ Checkout common repository
+      - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
-        with: 
-          repository: IbragimovDP/mobisharks_common
-          ssh-key: ${{ secrets.GIT_SUBMODULE_KEY}}
-          path: mobisharks_common
-      - name: ⬇️ Checkout target repository
-        uses: actions/checkout@v4
-        with:
-          path: main
       - name: Get app name
         id: get_app_name
         run: |
